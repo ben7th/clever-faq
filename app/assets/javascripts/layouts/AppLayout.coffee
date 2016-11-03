@@ -1,7 +1,5 @@
 module.exports = AppLayout = React.createClass
   render: ->
-    style = { padding: 20 }
-
-    <div className='app-layout' style={style}>
+    <div className='app-layout'>
       <YieldComponent component={window.content_component} />
     </div>

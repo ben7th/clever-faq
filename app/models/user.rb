@@ -41,6 +41,5 @@ class User
   # -------------
 
   field :login, type: String
-
-  has_one :member
+  field :name, type: String
 end

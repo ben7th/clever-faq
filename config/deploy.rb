@@ -7,9 +7,9 @@ require 'yaml'
 require 'mina_sidekiq/tasks'
 
 set :domain, '42.120.41.92'
-set :deploy_to, '/web/im-core'
+set :deploy_to, '/web/clever-faq'
 set :current_path, 'current'
-set :repository, 'https://github.com/ben7th/im-core.git'
+set :repository, 'https://github.com/ben7th/clever-faq.git'
 set :branch, 'deploy'
 set :user, 'root'
 set :term_mode, nil
@@ -56,10 +56,10 @@ task :setup => :environment do
   secrets = MinaUtil::Builder.ask_secrets
   queue! %[echo '#{secrets}' > "#{deploy_to}/shared/config/secrets.yml"]
 
-  nginx = MinaUtil::Builder.ask_nginx('im-core', '/web/im-core')
-  queue! %[echo '#{nginx}' > "/etc/nginx/conf.d/im-core.conf"]
+  nginx = MinaUtil::Builder.ask_nginx('clever-faq', '/web/clever-faq')
+  queue! %[echo '#{nginx}' > "/etc/nginx/conf.d/clever-faq.conf"]
   #test
-  #queue! %[echo '#{nginx}' > "/home/dd/im-core.conf"]
+  #queue! %[echo '#{nginx}' > "/home/dd/clever-faq.conf"]
 
   queue! %[touch "#{deploy_to}/shared/config/application.yml"]
   if File.exist? "config/application.yml.sample"

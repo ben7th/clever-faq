@@ -1,5 +1,5 @@
 {
-  "name": "im-core",
+  "name": "clever-faq",
   "dependencies": {
     "browserify": "~> 10.2.4",
     "browserify-incremental": "^3.0.1",

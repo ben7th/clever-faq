@@ -1,14 +1,14 @@
 development:
   clients:
     default:
-      database: im_core_development
+      database: clever_faq_development
       hosts:
         - localhost:27017
 
 test:
   clients:
     default:
-      database: im_core_test
+      database: clever_faq_test
       hosts:
         - localhost:27017
       options:

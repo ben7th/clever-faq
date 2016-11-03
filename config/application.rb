@@ -16,7 +16,7 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module ImCore
+module CleverFaq
   class Application < Rails::Application
     ### 各种猴子补丁
     config.to_prepare do

@@ -18,15 +18,3 @@ register = (component, displayName=null)->
 
 # auth
 register (require 'app/auth/AuthSignInPage'), 'AuthSignInPage'
-
-# organization
-register require 'app/OrganizationsTreesPage'
-register require 'app/OrganizationTreePage'
-register require 'app/OrganizationNodeShow'
-
-# chatroom
-register require 'app/chat/ChatCharAvatar'
-register require 'app/chat/ChatPageOrganizationTree'
-register require 'app/chat/ChatPageChatRoom'
-register require 'app/chat/ChatPageCurrentUser'
-register require 'app/chat/ChatPage'

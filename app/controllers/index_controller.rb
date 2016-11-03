@@ -1,16 +1,11 @@
 class IndexController < ApplicationController
   def index
-    roots = (OrganizationNode.roots || []).map { |x|
-      { 
-        id: x.id.to_s, 
-        name: x.name,
-        path: chat_path(oid: x.id)
-      }
-    }
+    if not user_signed_in?
+      redirect_to '/users/sign_in'
+      return
+    end
 
-    @component_name = 'OrganizationsTreesPage'
-    @component_data = {
-      tree_roots: roots
-    }
+    @component_name = 'IndexPage'
+    @component_data = {}
   end
 end

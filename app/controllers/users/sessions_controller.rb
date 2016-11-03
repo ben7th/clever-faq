@@ -9,7 +9,7 @@ class Users::SessionsController < Devise::SessionsController
       users: User.all.map { |x|
         {
           email: x.email,
-          name: x.member.name,
+          name: x.name,
           password: '123456'
         }
       }
