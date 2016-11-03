@@ -33,6 +33,14 @@ PC = React.createClass
           </div>
         } 
       />
+      
+      <div style={marginBottom: '1rem'}>
+        <p style={marginBottom: '1rem'}>扫描二维码打开这个页面</p>
+        <div style={padding: '0.5rem', border: 'solid 1px #ddd', display: 'inline-block', fontSize: 0}>
+          <QRCode value={location.href} />
+        </div>
+      </div>
+
       <QiangJinJiu />
       <ShowModal />
     </div>
@@ -80,7 +88,11 @@ ShowModal = React.createClass
     return if @state.modal?
     @setState modal: Modal.confirm {
       title: 'DEMO'
-      content: '你用手机操作打开了一个对话框'
+      content: 
+        <div>
+          <p style={marginBottom: '1rem'}>你用手机打开了一个对话框</p>
+          <img src='http://i.teamkn.com/i/Q7DXOTFS.png' />
+        </div>
     }
 
   close: ->

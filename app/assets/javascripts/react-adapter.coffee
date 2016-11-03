@@ -10,3 +10,6 @@ window.ReactRailsUJS.unmountComponents = (searchSelector)->
     ReactDOM.unmountComponentAtNode(node) if key
 
 window.MediaQuery = require 'react-responsive'
+
+# https://npm.taobao.org/package/qrcode.react
+window.QRCode = require('qrcode.react')
