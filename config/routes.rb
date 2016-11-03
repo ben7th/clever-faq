@@ -14,4 +14,9 @@ Rails.application.routes.draw do
   }
 
   root to: 'index#index'
+
+  namespace :demo do
+    get 'voice' => 'voice#show'
+    get 'link' => 'link#show'
+  end
 end

@@ -18,3 +18,10 @@ register = (component, displayName=null)->
 
 # auth
 register (require 'app/auth/AuthSignInPage'), 'AuthSignInPage'
+
+# app
+register (require 'app/IndexPage')
+
+# demo
+register (require 'app/demo/DemoVoicePage')
+register (require 'app/demo/DemoLinkPage')
