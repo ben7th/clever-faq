@@ -25,3 +25,6 @@ register (require 'app/IndexPage')
 # demo
 register (require 'app/demo/DemoVoicePage')
 register (require 'app/demo/DemoLinkPage')
+
+register (require 'app/demo/LandingPage')
+register (require 'app/demo/AuthPage')
