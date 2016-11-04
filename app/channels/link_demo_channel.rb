@@ -8,11 +8,15 @@ class LinkDemoChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
-  def toggle_text
-    ActionCable.server.broadcast "link_demo_channel", action: 'toggle_text'
+  def toggle_text(message)
+    ActionCable.server.broadcast "link_demo_channel", message
   end
 
   def show_modal(message)
-    ActionCable.server.broadcast "link_demo_channel", action: 'show_modal', oper: message['oper']
+    ActionCable.server.broadcast "link_demo_channel", message
+  end
+
+  def visit_site(message)
+    ActionCable.server.broadcast "link_demo_channel", message
   end
 end

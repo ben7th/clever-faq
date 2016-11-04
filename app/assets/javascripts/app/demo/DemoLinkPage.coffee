@@ -12,11 +12,20 @@ Mobile = React.createClass
     <div>
       <Alert message='手机 PC 联动测试' description='这是手机页面' />
       <div style={marginTop: '1rem', marginBottom: '1rem'}>
-        <Button type='primary' onClick={-> App.link_demo.toggle_text()}>切换文本显示</Button>
+        <Button style={marginRight: '1rem'} type='primary' 
+          onClick={-> App.link_demo.toggle_text('down')}>向下切换</Button>
+        <Button style={marginRight: '1rem'} type='primary' 
+          onClick={-> App.link_demo.toggle_text('up')}>向上切换</Button>
+      </div>
+      <div style={marginTop: '1rem', marginBottom: '1rem'}>
+        <Button style={marginRight: '1rem'} type='primary' 
+          onClick={-> App.link_demo.show_modal('open')}>弹出提示框</Button>
+        <Button style={marginRight: '1rem'} type='primary' 
+          onClick={-> App.link_demo.show_modal('close')}>关闭提示框</Button>
       </div>
       <div>
-        <Button style={marginRight: '1rem'} type='primary' onClick={-> App.link_demo.show_modal('open')}>弹出提示框</Button>
-        <Button style={marginRight: '1rem'} type='primary' onClick={-> App.link_demo.show_modal('close')}>关闭提示框</Button>
+        <Button style={marginRight: '1rem'} type='primary' 
+          onClick={-> App.link_demo.visit_site()}>打开必应</Button>
       </div>
     </div>
 
@@ -48,33 +57,47 @@ PC = React.createClass
 QiangJinJiu = React.createClass
   getInitialState: ->
     texts: [
-      '君不见，黄河之水天上来，奔流到海不复回。'
-      '君不见，高堂明镜悲白发，朝如青丝暮成雪。'
-      '人生得意须尽欢，莫使金樽空对月。'
-      '天生我材必有用，千金散尽还复来。'
-      '烹羊宰牛且为乐，会须一饮三百杯。'
-      '岑夫子，丹丘生，将进酒，杯莫停。'
-      '与君歌一曲，请君为我倾耳听。'
-      '钟鼓馔玉不足贵，但愿长醉不复醒。'
-      '古来圣贤皆寂寞，惟有饮者留其名。'
-      '陈王昔时宴平乐，斗酒十千恣欢谑。'
-      '主人何为言少钱，径须沽取对君酌。'
-      '五花马，千金裘，呼儿将出换美酒，与尔同销万古愁。'
+      '白日依山尽'
+      '黄河入海流'
+      '欲穷千里目'
+      '更上一层楼'
     ]
     idx: 0
 
   render: ->
     text = @state.texts[@state.idx]
-    <h1>{text}</h1>
+    <div>
+    <div style={display: 'inline-block'}>
+    {
+      @state.texts.map (t, idx)=>
+        style = if @state.idx == idx then {color: 'white', backgroundColor: '#4C8BF5'} else {}
+        <h2 style={style} key={idx}>{t}</h2>
+    }
+    </div>
+    </div>
 
-  toggle: ->
+  toggle_down: ->
     idx = @state.idx
     idx = (idx + 1) % @state.texts.length
     @setState idx: idx
 
+  toggle_up: ->
+    idx = @state.idx
+    idx = (idx + @state.texts.length - 1) % @state.texts.length
+    @setState idx: idx
+
   componentDidMount: ->
-    jQuery(document).off('link-demo:toggle-text').on 'link-demo:toggle-text', =>
-      @toggle()
+    jQuery(document).on 'link-demo:toggle_text', (evt, message)=>
+      switch message.direction
+        when 'down' then @toggle_down()
+        when 'up' then @toggle_up()
+
+    jQuery(document).on 'link-demo:visit_site', (evt, message)=>
+      Turbolinks.visit 'http://cn.bing.com/'
+
+  componentWillUnmount: ->
+    jQuery(document).off 'link-demo:toggle_text'
+    jQuery(document).off 'link-demo:visit_site'
 
 ShowModal = React.createClass
   getInitialState: ->
@@ -101,9 +124,10 @@ ShowModal = React.createClass
     @setState modal: null
 
   componentDidMount: ->
-    jQuery(document).off('link-demo:show-modal').on 'link-demo:show-modal', (evt, message)=>
+    jQuery(document).on 'link-demo:show_modal', (evt, message)=>
       switch message.oper
-        when 'open'
-          @open()
-        when 'close'
-          @close()
+        when 'open' then @open()
+        when 'close' then @close()
+
+  componentWillUnmount: ->
+    jQuery(document).off 'link-demo:show_modal'

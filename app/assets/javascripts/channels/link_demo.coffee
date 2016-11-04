@@ -6,14 +6,13 @@ App.link_demo = App.cable.subscriptions.create "LinkDemoChannel",
     # Called when the subscription has been terminated by the server
 
   received: (message)->
-    switch message.action
-      when 'toggle_text'
-        jQuery(document).trigger 'link-demo:toggle-text'
-      when 'show_modal'
-        jQuery(document).trigger 'link-demo:show-modal', message
+    jQuery(document).trigger "link-demo:#{message.action}", message
 
-  toggle_text: ->
-    @perform 'toggle_text'
+  toggle_text: (direction)->
+    @perform 'toggle_text', direction: direction
 
   show_modal: (oper)->
     @perform 'show_modal', oper: oper
+
+  visit_site: ->
+    @perform 'visit_site'
